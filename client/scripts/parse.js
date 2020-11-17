@@ -4,6 +4,18 @@ var Parse = {
 
   create: function(message, successCB, errorCB = null) {
     // todo: save a message to the server
+    $.ajax({
+      url: `http://parse.${window.CAMPUS}.hackreactor.com/chatterbox/classes/messages`,
+      type: 'POST',
+      data: JSON.stringify(message),
+      contentType: 'application/json',
+      success: function (successCB) {
+        console.log('chatterbox: Message sent');
+      },
+      error: function (errorCB) {
+        console.error('chatterbox: Failed to send message', errorCB);
+      }
+    });
   },
 
   readAll: function(successCB, errorCB = null) {

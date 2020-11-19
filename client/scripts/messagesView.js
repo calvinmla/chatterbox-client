@@ -3,9 +3,11 @@ var MessagesView = {
   $chats: $('#chats'),
 
   initialize: function() {
+    App.fetch();
   },
 
-  render: function() {
+  renderMessage: function(obj) {
+    MessagesView.$chats.append(MessageView.render(obj));
   }
 
 };

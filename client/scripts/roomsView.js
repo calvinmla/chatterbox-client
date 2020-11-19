@@ -4,9 +4,11 @@ var RoomsView = {
   $select: $('#rooms select'),
 
   initialize: function() {
+    App.fetch();
   },
 
-  render: function() {
+  renderRoom: function() {
+    RoomsView.$('#rooms button').append(RoomsView.render(obj));
   }
 
 };

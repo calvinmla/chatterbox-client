@@ -9,14 +9,13 @@ var FormView = {
   handleSubmit: function(event) {
     // Stop the browser from submitting the form
     event.preventDefault();
-    var newMessage = {username: App.username, text: $('#message').val()};
-    console.log(newMessage);
-    console.log(Parse.create(newMessage));
-    MessagesView.renderMessage(newMessage);
     // create an object
     // grab username (use App.username), message (use Jquery .val(), and roomname (???)
+    var newMessage = {username: App.username, text: $('#message').val()};
     // maybe use Parse.create function to 'POST' to server
+    Parse.create(newMessage);
     // use Jquery .on(something) and the render function to add to the #chats component
+    MessagesView.renderMessage(newMessage);
 
     console.log('click!');
   },

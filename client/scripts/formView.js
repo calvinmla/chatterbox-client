@@ -11,7 +11,7 @@ var FormView = {
     event.preventDefault();
     // create an object
     // grab username (use App.username), message (use Jquery .val(), and roomname (???)
-    var newMessage = {username: App.username, text: $('#message').val()};
+    var newMessage = {username: App.username, text: $('#message').val(), roomname: RoomsView.$select.val() || 'Lobby'};
     // maybe use Parse.create function to 'POST' to server
     Parse.create(newMessage);
     // use Jquery .on(something) and the render function to add to the #chats component

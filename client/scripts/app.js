@@ -11,6 +11,7 @@ var App = {
     FormView.initialize();
     RoomsView.initialize();
     MessagesView.initialize();
+    Friends.initialize();
 
     // Fetch initial batch of messages
     App.startSpinner();
@@ -20,19 +21,28 @@ var App = {
 
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
-      // examine the response from the server request:
+
       var test = data; // test is equal to the server object holding the data
-      for (var i = 0; i < 5; i++) { // test.results = the array holding the data
-        var serverObj = test.results[i];
-        MessagesView.renderMessage(serverObj);
-        // RoomsView.renderMessage(serverObj);
-        // return arr[Math.random() * (100 - 0) + 0 ];
-      }
       console.log(test);
+      for (var i = 0; i < test.results.length; i++) { // test.results = the array holding the data // change to data
+        var serverObj = test.results[i];
+        Messages = test;
+        MessagesView.renderMessage(serverObj);
+
+        if ((serverObj.roomname !== undefined) && (Rooms.results.indexOf(serverObj.roomname) === -1)) {
+          Rooms.results.push(serverObj.roomname);
+
+        }
+      }
+      // examine the response from the server request:
+
+      console.log(Rooms.results);
+      console.log(Messages);
 
       callback();
     });
   },
+
 
   startSpinner: function() {
     App.$spinner.show();

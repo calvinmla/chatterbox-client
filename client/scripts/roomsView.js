@@ -2,24 +2,44 @@ var RoomsView = {
 
   $button: $('#rooms button'),
   $select: $('#rooms select'),
+  $refresh: $('#refresh'),
 
 
   initialize: function() {
-    for (var i = 0; i < Rooms.results.length; i++) {
-      RoomsView.renderRoom(Rooms.results[i]);
+    var uniqueRooms = _.uniq(Rooms.results);
+    for (var i = 0; i < uniqueRooms.length; i++) {
+      RoomsView.renderRoom(uniqueRooms[i]);
     }
     //add click even button
-    RoomsView.$button.on('click', RoomsView.handleAddButton);
+    RoomsView.$button.on('click', RoomsView.handleAddRoom);
+    RoomsView.$select.on('change', RoomsView.handleSelect);
   },
 
-  handleAddButton: function(event) {
+  handleSelect: function() {
+    // when a room is selected, remove all the other rooms from the #chats area
     event.preventDefault();
-    Rooms.results.push($('#roomname'.val()));
-    renderRoom($('#roomname'.val()));
+    var selectedOption = $('#rooms option:selected').val();
+    $('.chat').remove();
+    for (var i = 0; i < Messages.results.length; i++) {
+      if (Messages.results[i].roomname === selectedOption) {
+        MessagesView.renderMessage(Messages.results[i]);
+      }
+    }
   },
 
-  renderRoom: function(event) {
-    RoomsView.$select.append(`<option value = "${event}">${event}</option>`);
+  handleAddRoom: function(event) {
+    event.preventDefault();
+    var newRoom = $('#roomname').val();
+    console.log(newRoom);
+    if (Rooms.results.indexOf(newRoom === -1)) {
+      Rooms.results.push(newRoom);
+      RoomsView.renderRoom(newRoom);
+      // need to fix this as it continues to add blank spaces into <select>
+    }
+  },
+
+  renderRoom: function(room) {
+    RoomsView.$select.append(`<option value="${_.escape(room)}">${_.escape(room)}</option>`);
   }
 
 };

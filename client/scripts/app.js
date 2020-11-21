@@ -9,7 +9,7 @@ var App = {
 
 
     FormView.initialize();
-    RoomsView.initialize();
+    // RoomsView.initialize();
     MessagesView.initialize();
     Friends.initialize();
 
@@ -28,21 +28,17 @@ var App = {
         var serverObj = test.results[i];
         Messages = test;
         MessagesView.renderMessage(serverObj);
-
         if ((serverObj.roomname !== undefined) && (Rooms.results.indexOf(serverObj.roomname) === -1)) {
           Rooms.results.push(serverObj.roomname);
-
         }
       }
       // examine the response from the server request:
-
+      RoomsView.initialize();
       console.log(Rooms.results);
-      console.log(Messages);
 
       callback();
     });
   },
-
 
   startSpinner: function() {
     App.$spinner.show();

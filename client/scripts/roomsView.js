@@ -15,7 +15,7 @@ var RoomsView = {
     RoomsView.$select.on('change', RoomsView.handleSelect);
   },
 
-  handleSelect: function() {
+  handleSelect: function() { // there is still an issue with this function not displaying newly added rooms after adding a message to that room.
     // when a room is selected, remove all the other rooms from the #chats area
     event.preventDefault();
     var selectedOption = $('#rooms option:selected').val();
@@ -30,7 +30,6 @@ var RoomsView = {
   handleAddRoom: function(event) {
     event.preventDefault();
     var newRoom = $('#roomname').val();
-    console.log(newRoom);
     if (Rooms.results.indexOf(newRoom === -1)) {
       Rooms.results.push(newRoom);
       RoomsView.renderRoom(newRoom);

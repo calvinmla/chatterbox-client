@@ -9,7 +9,7 @@ var App = {
 
 
     FormView.initialize();
-    // RoomsView.initialize();
+    // RoomsView.initialize(); moved into fetch()
     MessagesView.initialize();
     Friends.initialize();
 
